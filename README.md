@@ -1,6 +1,6 @@
 # CadastrodeProdutos [EM DESENVOLVIMENTO]
 
-Este projeto consiste em um sistema de cadastro de produtos desenvolvido em Java, utilizando o MySQL como banco de dados para armazenamento dos dados. O programa permite ao usuário cadastrar, excluir e pesquisar produtos.
+Este projeto consiste em um sistema de cadastro de produtos desenvolvido em Java com SWING para a interface, utilizando o MySQL como banco de dados para armazenamento dos dados. O programa permite ao usuário cadastrar, excluir e pesquisar produtos.
 
 O cadastro de produtos envolve a coleta das informações como código do produto, nome, cor e quantidade. Ao inserir um novo produto, o sistema verifica se o produto já existe e aumenta a quantidade caso necessário e verifica se todos os campos foram preenchidos corretamente.
 
