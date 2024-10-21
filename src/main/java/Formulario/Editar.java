@@ -4,6 +4,14 @@
  */
 package Formulario;
 
+import bancodedados.Conexao;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author LENOVO
@@ -26,22 +34,258 @@ public class Editar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        beditar = new javax.swing.JButton();
+        txtcodigo = new javax.swing.JTextField();
+        txtcor = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabelaprodutos = new javax.swing.JTable();
+        bpesquisar = new javax.swing.JButton();
+        txtquantidade = new javax.swing.JSpinner();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        bsair = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        beditar.setText("Editar");
+        beditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                beditarActionPerformed(evt);
+            }
+        });
+
+        txtcodigo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcodigoActionPerformed(evt);
+            }
+        });
+
+        txtcor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtcorActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
+        jLabel1.setText("EDITAR");
+
+        tabelaprodutos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Código", "Nome", "Cor", "Quantidade"
+            }
+        ));
+        jScrollPane1.setViewportView(tabelaprodutos);
+
+        bpesquisar.setText("Pesquisar");
+        bpesquisar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bpesquisarActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setText("Código do Produto que será editado");
+
+        jLabel4.setText("Cor do produto que será editado");
+
+        jLabel5.setText("Quantidade que será editada");
+
+        bsair.setText("Sair");
+        bsair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bsairActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtcor, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(bpesquisar)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(beditar))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(bsair)))
+                .addGap(16, 16, 16))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtcor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(58, 58, 58)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtquantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bpesquisar)
+                    .addComponent(beditar))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bsair)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void beditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beditarActionPerformed
+        // TODO add your handling code here:
+        editarProduto();
+        pesquisarproduto();
+    }//GEN-LAST:event_beditarActionPerformed
+
+    private void txtcodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcodigoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcodigoActionPerformed
+
+    private void bpesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bpesquisarActionPerformed
+        // Chamando a pesquisa do banco de dados
+        pesquisarproduto();
+    }//GEN-LAST:event_bpesquisarActionPerformed
+
+    private void txtcorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtcorActionPerformed
+
+    private void bsairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bsairActionPerformed
+        // TODO add your handling code here:
+        this.dispose();
+    }//GEN-LAST:event_bsairActionPerformed
+
+    Conexao con=new Conexao();
+    
+    public void editarProduto() {
+    try {
+        Connection c = con.conectar();
+        String codigo = txtcodigo.getText(); // Obtem o código do produto que deseja editar
+        String cor = txtcor.getText(); // Obtem a cor que o usuário quer editar
+        int quantidadeAlterar = (int) txtquantidade.getValue(); // Quantidade a ser alterada (1 ou -1)
+
+        // Verifica se o produto existe na base de dados
+        PreparedStatement verificarStmt = c.prepareStatement("SELECT quantidade FROM produtos WHERE codigo = ? AND cor = ?");
+        verificarStmt.setString(1, codigo);
+        verificarStmt.setString(2, cor);
+        ResultSet rs = verificarStmt.executeQuery();
+
+        if (rs.next()) {
+            // Produto encontrado, obtém a quantidade atual
+            int quantidadeAtual = rs.getInt("quantidade");
+
+            // Calcula a nova quantidade
+            int novaQuantidade = quantidadeAtual + quantidadeAlterar;
+
+            // Verifica se a nova quantidade é negativa
+            if (novaQuantidade < 0) {
+                JOptionPane.showMessageDialog(null, "A quantidade não pode ser negativa.");
+            } else {
+                // Atualiza a quantidade do produto no banco de dados
+                PreparedStatement atualizarStmt = c.prepareStatement("UPDATE produtos SET quantidade = ? WHERE codigo = ? AND cor = ?");
+                atualizarStmt.setInt(1, novaQuantidade);
+                atualizarStmt.setString(2, codigo);
+                atualizarStmt.setString(3, cor);
+                atualizarStmt.executeUpdate();
+                atualizarStmt.close();
+
+                JOptionPane.showMessageDialog(null, "Quantidade atualizada com sucesso. Nova quantidade: " + novaQuantidade);
+            }
+        } else {
+            // Produto não encontrado
+            JOptionPane.showMessageDialog(null, "Produto não encontrado.");
+        }
+
+        rs.close();
+        verificarStmt.close();
+        con.desconectar();
+    } catch (SQLException e) {
+        System.err.println("Erro ao editar o produto");
+        System.err.println(e.getMessage());
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Por favor, insira um número válido para a quantidade.");
+    } finally {
+        con.desconectar();
+    }
+}
+    
+    public void pesquisarproduto(){
+          try {
+            Connection c=con.conectar();
+            PreparedStatement pesquisarStmt = c.prepareStatement("SELECT * FROM produtos");  
+            ResultSet rs = pesquisarStmt.executeQuery();                                         
+                     DefaultTableModel model;
+                model = (DefaultTableModel) tabelaprodutos.getModel();
+                model.setNumRows(0);
+                           while(rs.next()){
+                          model.addRow(
+                                new Object[]{
+                            rs.getString("codigo"),
+                            rs.getString("nome"),
+                            rs.getString("cor"),
+                            rs.getString("quantidade"),
+                        });                                             
+        }    
+        } catch (SQLException e) {
+           System.out.println("ocorreu um erro ao conectar");
+        } 
+    }
+
+
+
+            public void run() {
+                new Pesquisar().setVisible(true);
+            }
+
+
+    
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -78,5 +322,18 @@ public class Editar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton beditar;
+    private javax.swing.JButton bpesquisar;
+    private javax.swing.JButton bsair;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tabelaprodutos;
+    private javax.swing.JTextField txtcodigo;
+    private javax.swing.JTextField txtcor;
+    private javax.swing.JSpinner txtquantidade;
     // End of variables declaration//GEN-END:variables
 }
